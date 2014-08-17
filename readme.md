@@ -8,7 +8,24 @@
 
 * Create modular, maintainable themes.
 * Manage your theme components from a semantic Yaml file.
-* Extend base themes cleanly, no more `if(function_exists)` calls.
+* Extend base themes cleanly, no more `if(!function_exists())` calls.
+
+### What's in Soda?
+
+* AssetManager, which handles your themes styles and scripts.
+* SidebarManager, which handles your theme sidebars.
+* Translator, which handles your themes i18n functions.
+* SupportManager, which handles theme support definitions.
+* Cache, a simple cache wrapper for the `WP_Object_Cache`
+* Theme, the class which configures everything.
+
+Future Components:
+
+* Breadcrumbs, simple breadcrumbs.
+* Header, implement custom headers. 
+* Paginator, handle your post pagination.
+* Regions, a simple way to define re-usable content blocks in your theme.
+
 
 ### Getting Started Guide
 
@@ -164,6 +181,49 @@ services:
         class: MyTheme\Theme\Components\MyPaginator
 ```
 
-We will touch more on the Dependency Injection component later.
+We will touch more on the Dependency Injection container in the ** Creating Components ** section. 
 
-** This documentation is currently under review **
+### Using Components
+
+To get started with Soda's components, you simply need to request them from the themes container. Keep in mind, you will rarely need to explicitily use one of the components in your theme. This is because the components are automatically invoked from the themes configuration file (`theme.yml`).
+
+##### Using the Translator
+
+In your themes `index.php` file, let's grab our Translator component and start echo'ing some strings:
+
+`exampletheme/index.php`:
+
+```
+[..]
+
+// Print the string
+$theme->get('translator)->t('My Text);
+
+// Return the string
+$theme->get('translator)->t('My Text, true);
+
+```
+
+So, what's happening here?
+
+* We're grabbing our translator service from the Soda container.
+* We're using the `t` method (translate) on the object.
+
+The astute reader will notice that **we don't need to append the themes textdomain** in the method call, this is because it is handled for you. 
+
+### Creating Components
+
+##### Creating the base component
+
+##### Using the Dependency Injection Container
+
+### Examples
+
+##### Setting up a menu navigation walker
+
+##### 
+
+### Performance
+
+##### Setting up W3 Total Cache
+
