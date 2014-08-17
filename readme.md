@@ -212,6 +212,77 @@ So, what's happening here?
 
 The astute reader will notice that **we don't need to append the themes textdomain** in the method call, this is because it is handled for you. 
 
+### Child Themes
+
+One of the benefits of Soda is the ability to create child themes in an OOP manner.
+
+##### 1. Creating the child theme
+
+To get started, open your child themes `functions.php` file and implement the following code:
+
+```
+use MyChildTheme\Theme\MyChildTheme;
+
+add_action('after_setup_theme', function() use (&$theme) {
+
+	include('vendor/autoload.php');
+
+	$theme = new MyChildTheme();
+	
+}, 10);
+```
+
+The main difference between a Soda parent theme and child theme, is that the child theme is **executed after the parent**. This ensures that we have the ability to extend the parent theme.
+
+##### 2. Setup your child theme class
+Once your functions.php file has been setup, let's create the MyChildTheme class. Within the theme folder, create a folder structure as follows:
+
+`examplechildtheme/src/MyChildTheme/Theme/`
+
+Next, let's create a file in this new folder structure called MyChildTheme.php:
+
+`examplechildtheme/src/MyChildTheme/Theme/MyChildTheme.php:`
+
+```
+namespace MyChildTheme\Theme;
+
+use Soda\Component\Theme\Theme;
+use Soda\Component\Theme\ThemeInterface;
+
+class MyChildTheme extends MyTheme implements ThemeInterface
+{
+    public function boot()
+    {
+        echo "Hello Child Theme World!";
+    }
+}
+```
+
+##### 3. Install the theme
+
+Just like we did before, copy over the `composer.json` file and adjust some of the settings to match your new child theme:
+
+`examplechildtheme/composer.json`:
+
+```
+{	
+	"name": "myname/mychildtheme",
+    "license": "MIT",
+    "type": "project",
+    "minimum-stability": "dev",
+    "description": "My Child Theme",
+    "autoload": {
+        "psr-0": { "MyChildTheme\\Theme\\": "src/" }
+    } 
+}
+```
+
+Next, run `composer install` from your command line to install your new child theme.
+
+##### 5. Final Steps
+
+Now that your child theme has been setup, you can safely overload some of the parent themes methods, e.g. `boot` or any other method you have created in the parent. 
+
 ### Creating Components
 
 ##### Creating the base component

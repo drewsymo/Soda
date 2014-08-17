@@ -16,6 +16,8 @@ use Symfony\Component\Config\FileLocator;
  *
  * This class is the kernel of our theme, it builds our container and sets up our
  * theme components, such as assets, sidebars, menus and feature support.
+ *
+ * @todo  Need to create cache directory if it doesn't exist. http://symfony.com/doc/current/components/filesystem.html
  */
 class Theme
 {
