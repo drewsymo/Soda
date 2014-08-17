@@ -24,6 +24,7 @@ Future Components:
 * Breadcrumbs, simple breadcrumbs.
 * Header, implement custom headers. 
 * Paginator, handle your post pagination.
+* AttributeManager, define groups of attributes (e.g. schema)for different sections of your theme. 
 * Regions, a simple way to define re-usable content blocks in your theme.
 
 
