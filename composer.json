@@ -1,0 +1,17 @@
+{
+	"name": "soda/framework-standard-edition",
+    "license": "MIT",
+    "type": "project",
+    "minimum-stability": "dev",
+    "description": "The \"Soda Standard Edition\" distribution",
+    "autoload": {
+        "psr-0": {
+            "Soda\\Component\\": "src/"
+        }
+    },
+    "require": {
+        "symfony/config": "2.6.*@dev",
+        "symfony/yaml": "2.6.*@dev",
+        "symfony/dependency-injection": "2.6.*@dev"
+    }
+}

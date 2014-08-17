@@ -1,0 +1,24 @@
+# Service Configuration
+# You can define your own services and parameters in your theme/config/theme.yml definition.
+
+parameters:
+    theme.cache: sodacache
+
+services:
+    cache:
+        class: Soda\Component\CacheManager\CacheManager
+        arguments: ["%theme.cache%"]
+    translator:
+        class: Soda\Component\Translator\Translator
+        arguments: ["%theme.path%", "%theme.textdomain%"]
+    sidebars:
+        class: Soda\Component\SidebarManager\SidebarManager
+        calls:
+            - [setTranslator, ["@translator"]]
+    menus:
+        class: Soda\Component\MenuManager\MenuManager
+        calls:
+            - [setTranslator, ["@translator"]]
+    assets:
+        class: Soda\Component\AssetManager\AssetManager
+        arguments: ["%theme.path%", "%theme.uri%"]
